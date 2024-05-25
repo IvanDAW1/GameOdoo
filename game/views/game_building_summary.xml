@@ -1,0 +1,35 @@
+<odoo>
+    <data>
+
+        <record id="view_building_summary_tree" model="ir.ui.view">
+            <field name="name">building.summary.tree</field>
+            <field name="model">game.building.summary</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="player_name"/>
+                    <field name="level"/>
+                    <field name="remaining_construction_time"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="view_building_summary_form" model="ir.ui.view">
+            <field name="name">building.summary.form</field>
+            <field name="model">game.building.summary</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="player_name"/>
+                            <field name="level"/>
+                            <field name="remaining_construction_time"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

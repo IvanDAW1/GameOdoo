@@ -1,0 +1,77 @@
+<odoo>
+    <data>
+
+        <record id="view_game_building_form" model="ir.ui.view">
+            <field name="name">game.building.form</field>
+            <field name="model">game.building</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_construct" string="Construct" type="object" class="btn-primary"/>
+                        <button name="action_upgrade" string="Upgrade" type="object" class="btn-primary"/>
+                        <button name="load_building_summaries" string="Load Building Summaries" type="object"
+                                class="btn-primary"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="player_id"/>
+                            <field name="type_id"/>
+                            <field name="level"/>
+                            <field name="is_constructed" widget="statusbar"/>
+                            <field name="construction_time" invisible="1"/>
+                            <field name="remaining_construction_time"/>
+                            <field name="construction_progress" widget="progressbar"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_game_building_kanban" model="ir.ui.view">
+            <field name="name">game.building.kanban</field>
+            <field name="model">game.building</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="player_id">
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_card">
+                                <div class="oe_kanban_details">
+                                    <strong>
+                                        <field name="name"/>
+                                    </strong>
+                                    <div>
+                                        <field name="level"/>
+                                    </div>
+                                    <div>
+                                        <field name="is_constructed"/>
+                                    </div>
+                                    <div>
+                                        <field name="remaining_construction_time"/>
+                                    </div>
+                                    <div>
+                                        <field name="construction_progress" widget="progressbar"/>
+                                    </div>
+                                    <div>
+                                        FINISH UPGRADE
+                                    </div>
+                                    <div>
+                                        <field name="completion_date"/>
+                                    </div>
+                                    <div class="oe_kanban_buttons">
+                                        <button name="action_construct" type="object" class="btn btn-primary">
+                                            Construct
+                                        </button>
+                                        <button name="action_upgrade" type="object" class="btn btn-primary">
+                                            Upgrade
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b6c70378-dd06-44b4-9b9e-aec1e269e68e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/game/demo/game_data_demo.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/views/game_battle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/views/game_building.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/views/game_building_summary.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/views/game_building_types.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/__manifest__.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/__manifest__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/demo/demo.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/models/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/models/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/security/ir.model.access.csv" beforeDir="false" afterPath="$PROJECT_DIR$/game/security/ir.model.access.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/views/player.xml" beforeDir="false" afterPath="$PROJECT_DIR$/game/views/game_player.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/views/views.xml" beforeDir="false" afterPath="$PROJECT_DIR$/game/views/views.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2aoeim2yQOTk2VKL3vLcH6OOJTB" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.models.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RdControllerToolWindowsLayoutState" isNewUi="true">
+    <layout>
+      <window_info id="Space Code Reviews" show_stripe_button="false" />
+      <window_info id="Bookmarks" show_stripe_button="false" side_tool="true" />
+      <window_info id="Merge Requests" show_stripe_button="false" />
+      <window_info id="Commit_Guest" show_stripe_button="false" />
+      <window_info id="Pull Requests" show_stripe_button="false" />
+      <window_info id="Learn" show_stripe_button="false" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.5321691" visible="true" weight="0.2176893" />
+      <window_info id="Commit" order="1" weight="0.21834204" />
+      <window_info id="Structure" order="2" sideWeight="0.4678309" side_tool="true" weight="0.21834204" />
+      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
+      <window_info anchor="bottom" id="TypeScript" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Duplicates" weight="0.33028084" />
+      <window_info anchor="bottom" id="Python Packages" show_stripe_button="false" />
+      <window_info anchor="bottom" id="TODO" show_stripe_button="false" />
+      <window_info anchor="bottom" id="File Transfer" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Python Console" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" weight="0.32173383" />
+      <window_info anchor="bottom" id="Find" weight="0.25091577" />
+      <window_info anchor="bottom" id="Version Control" order="0" />
+      <window_info anchor="bottom" id="Problems View" order="1" weight="0.25183824" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="2" visible="true" weight="0.31440783" />
+      <window_info anchor="bottom" id="Services" order="3" />
+      <window_info anchor="right" id="Plots" show_stripe_button="false" />
+      <window_info anchor="right" id="Endpoints" show_stripe_button="false" />
+      <window_info anchor="right" content_ui="combo" id="Notifications" order="0" weight="0.25" />
+      <window_info anchor="right" id="AIAssistant" order="1" weight="0.32996082" />
+      <window_info anchor="right" id="Database" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/game/views" />
+      <recent name="$PROJECT_DIR$/game/data" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-50da183f06c8-2887949eec09-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-233.13135.95" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b6c70378-dd06-44b4-9b9e-aec1e269e68e" name="Changes" comment="" />
+      <created>1704989491455</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1704989491455</updated>
+      <workItem from="1704989497265" duration="593000" />
+      <workItem from="1716119695087" duration="334000" />
+      <workItem from="1716120523324" duration="10650000" />
+      <workItem from="1716230285760" duration="979000" />
+      <workItem from="1716232826556" duration="11232000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/modules$models.coverage" NAME="models Coverage Results" MODIFIED="1716417557945" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/game/models" />
+  </component>
+</project>

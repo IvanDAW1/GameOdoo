@@ -10,7 +10,7 @@
         Long description of module's purpose
     """,
 
-    'author': "My Company",
+    'author': "Ivan",
     'website': "https://www.yourcompany.com",
 
     # Categories can be used to filter modules in modules listing
@@ -27,10 +27,17 @@
         'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
-        'views/player.xml'
+        'views/game_player.xml',
+        'views/game_building_types.xml',
+        'views/game_building.xml',
+        'views/game_battle.xml',
+        'demo/game_data_demo.xml',
+        'views/game_building_summary.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
-        'demo/demo.xml',
+        'demo/game_data_demo.xml',
     ],
+    'installable': True,
+    'application': True,
 }

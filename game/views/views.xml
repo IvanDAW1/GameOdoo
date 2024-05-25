@@ -1,24 +1,71 @@
 <odoo>
     <data>
 
+        <!-- Actions -->
         <record model="ir.actions.act_window" id="game.action_player">
             <field name="name">Players</field>
-
             <field name="res_model">game.player</field>
             <field name="view_mode">tree,form,kanban</field>
         </record>
 
-        <!-- Top menu item -->
+        <record model="ir.actions.act_window" id="action_game_building_type_tree">
+            <field name="name">Building Types</field>
+            <field name="res_model">game.building.type</field>
+            <field name="view_mode">tree,form,kanban</field>
+        </record>
 
-        <menuitem name="game" id="game.menu_root"/>
+        <record model="ir.actions.act_window" id="action_game_battle">
+            <field name="name">Battles</field>
+            <field name="res_model">game.battle</field>
+            <field name="view_mode">tree,form</field>
+        </record>
 
-        <!-- menu categories -->
+        <record model="ir.actions.act_window" id="action_game_building">
+            <field name="name">Buildings</field>
+            <field name="res_model">game.building</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
 
+        <record model="ir.actions.act_window" id="action_building_summary">
+            <field name="name">Building Summaries</field>
+            <field name="res_model">game.building.summary</field>
+            <field name="view_mode">tree</field>
+            <field name="target">new</field>
+        </record>
+
+        <record id="action_player_creation_wizard" model="ir.actions.act_window">
+            <field name="name">Create Player Wizard</field>
+            <field name="res_model">game.player.creation.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <record id="action_battle_wizard" model="ir.actions.act_window">
+            <field name="name">Battle Wizard</field>
+            <field name="res_model">game.battle_wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <!-- Top Menu Item -->
+        <menuitem name="Game" id="game.menu_root"/>
+        <!-- Menu -->
         <menuitem name="Menu" id="game.menu_1" parent="game.menu_root"/>
+        <menuitem name="Building Types" id="menu_game_building_types" parent="game.menu_root"/>
+        <menuitem name="Battles" id="menu_game_battle" parent="game.menu_root"/>
 
-        <!-- actions -->
-
-        <menuitem name="Player" id="game.menu_1_player" parent="game.menu_1" action="game.action_player"/>
+        <!-- Menu Actions -->
+        <menuitem name="Players" id="game.menu_1_player" parent="game.menu_1" action="game.action_player"/>
+        <menuitem name="All Building Types" id="menu_game_all_building_types" parent="menu_game_building_types"
+                  action="action_game_building_type_tree"/>
+        <menuitem name="Buildings" id="menu_game_building" parent="game.menu_1" action="action_game_building"/>
+        <menuitem name="New Battle" id="menu_game_battle_form" parent="menu_game_battle" action="action_game_battle"/>
+        <menuitem name="Building Summaries" id="menu_building_summary" parent="game.menu_1"
+                  action="action_building_summary"/>
+        <menuitem id="menu_player_creation_wizard" name="Create Player Wizard" parent="game.menu_1"
+                  action="action_player_creation_wizard" sequence="10"/>
+        <menuitem id="menu_action_battle_wizard" name="Battle Wizard" parent="menu_game_battle"
+                  action="action_battle_wizard"/>
 
     </data>
 </odoo>

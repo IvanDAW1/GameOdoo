@@ -1,2 +1,9 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_game_player,game.player,model_game_player,base.group_user,1,1,1,1
+access_game_building,access_game_building,model_game_building,base.group_user,1,1,1,1
+access_game_player,access_game_player,model_game_player,base.group_user,1,1,1,1
+access_game_building_type,access_game_building_type,model_game_building_type,base.group_user,1,1,1,1
+access_game_battle,access.game.battle,model_game_battle,,1,1,1,1
+access_building_summary,access.building.summary,model_game_building_summary,,1,1,1,1
+access_player_creation_wizard,access_player_creation_wizard,model_game_player_creation_wizard,base.group_user,1,1,1,1
+access_game_building_wizard","access.game.building.wizard","model_game_building_wizard","base.group_user",1,1,1,1
+access_game_battle_wizard,game.battle.wizard,model_game_battle_wizard,base.group_user,1,1,1,1

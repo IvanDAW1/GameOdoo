@@ -1,0 +1,64 @@
+<odoo>
+    <data>
+
+        <record id="view_battle_form" model="ir.ui.view">
+            <field name="name">battle.form</field>
+            <field name="model">game.battle</field>
+            <field name="arch" type="xml">
+                <form string="Battle">
+                    <header>
+                        <button name="action_initiate_battle" type="object" string="Initiate Battle" class="btn-primary"
+                                states="draft"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="attacker_id"/>
+                            <field name="defender_id"/>
+                            <field name="result" readonly="1"/>
+                            <field name="state" readonly="1"/>
+                            <field name="progress" widget="progressbar" readonly="1"/>
+                        </group>
+                        <footer>
+                            <button string="Close" class="btn-secondary" special="cancel"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="view_battle_tree" model="ir.ui.view">
+            <field name="name">battle.tree</field>
+            <field name="model">game.battle</field>
+            <field name="arch" type="xml">
+                <tree string="Battles">
+                    <field name="attacker_id"/>
+                    <field name="defender_id"/>
+                    <field name="result"/>
+                    <field name="state"/>
+                    <field name="progress"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_battle_wizard_form" model="ir.ui.view">
+            <field name="name">battle.wizard.form</field>
+            <field name="model">game.battle_wizard</field>
+            <field name="arch" type="xml">
+                <form string="Battle Wizard">
+                    <sheet>
+                        <group>
+                            <field name="attacker_id"/>
+                            <field name="defender_id"/>
+                            <field name="result" readonly="1"/>
+                        </group>
+                        <footer>
+                            <button name="action_initiate_battle" string="Initiate Battle" type="object"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

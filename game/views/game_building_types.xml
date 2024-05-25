@@ -1,0 +1,20 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="view_game_building_type_tree">
+            <field name="name">game.building.type.tree</field>
+            <field name="model">game.building.type</field>
+            <field name="arch" type="xml">
+                <tree string="Building Types">
+                    <field name="name"/>
+                    <field name="gold_production"/>
+                    <field name="mana_production"/>
+                    <field name="food_production"/>
+                    <field name="troop_production"/>
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</odoo>
+
