@@ -17,7 +17,7 @@
         <record model="ir.actions.act_window" id="action_game_battle">
             <field name="name">Battles</field>
             <field name="res_model">game.battle</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">tree,form,calendar</field>
         </record>
 
         <record model="ir.actions.act_window" id="action_game_building">

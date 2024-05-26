@@ -15,6 +15,38 @@
             </field>
         </record>
 
+        <record id="view_game_building_type_form" model="ir.ui.view">
+            <field name="name">game.building.type.form</field>
+            <field name="model">game.building.type</field>
+            <field name="arch" type="xml">
+                <form string="Building Type">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="gold_production"/>
+                            <field name="mana_production"/>
+                            <field name="food_production"/>
+                            <field name="troop_production"/>
+                        </group>
+                        <group>
+                            <field name="base_gold_cost"/>
+                            <field name="base_mana_cost"/>
+                            <field name="base_food_cost"/>
+                            <field name="base_construction_time"/>
+                            <field name="max_level"/>
+                        </group>
+                        <group>
+                            <field name="upgrade_gold_cost"/>
+                            <field name="upgrade_mana_cost"/>
+                            <field name="upgrade_food_cost"/>
+                        </group>
+                        <group>
+                            <field name="icon"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
     </data>
 </odoo>
 

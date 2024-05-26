@@ -33,6 +33,7 @@
         'views/game_battle.xml',
         'demo/game_data_demo.xml',
         'views/game_building_summary.xml',
+        'data/cron_game.xml'
     ],
     # only loaded in demonstration mode
     'demo': [

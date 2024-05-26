@@ -26,7 +26,6 @@
             </field>
         </record>
 
-
         <record id="view_battle_tree" model="ir.ui.view">
             <field name="name">battle.tree</field>
             <field name="model">game.battle</field>
@@ -37,6 +36,8 @@
                     <field name="result"/>
                     <field name="state"/>
                     <field name="progress"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
                 </tree>
             </field>
         </record>
@@ -57,6 +58,20 @@
                         </footer>
                     </sheet>
                 </form>
+            </field>
+        </record>
+
+        *No se que hacer en esta vista la verdad o para que usarla :(
+        <record id="view_game_battle_calendar" model="ir.ui.view">
+            <field name="name">game.battle.calendar</field>
+            <field name="model">game.battle</field>
+            <field name="arch" type="xml">
+                <calendar string="Battle Calendar" date_start="start_date" date_stop="end_date">
+                    <field name="attacker_id"/>
+                    <field name="defender_id"/>
+                    <field name="result"/>
+                    <field name="progress"/>
+                </calendar>
             </field>
         </record>
 

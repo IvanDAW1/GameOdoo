@@ -3,7 +3,9 @@
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 from datetime import datetime, timedelta
-import random
+import logging
+
+logging.basicConfig(filename='/var/log/odoo/odoo-server.log.4', level=logging.DEBUG)
 
 
 class Player(models.Model):
@@ -29,7 +31,7 @@ class Player(models.Model):
     total_resources = fields.Float(string="Total Resources", compute='_compute_total_resources')
 
     battle_results = fields.Many2many('game.battle', string="Battle Results", compute='_compute_battle_results')
-    
+
     @api.depends()
     def _compute_battle_results(self):
         for player in self:
@@ -191,36 +193,40 @@ class Building(models.Model):
             if building.is_constructed:
                 raise ValidationError("The building is already constructed.")
             building_type = building.type_id
-            if not building.is_constructed and building.player_id.gold >= building_type.base_gold_cost and \
-                    building.player_id.mana >= building_type.base_mana_cost and \
-                    building.player_id.food >= building_type.base_food_cost and \
-                    building.player_id.can_build_more_buildings():
-                building.player_id.gold -= building_type.base_gold_cost
-                building.player_id.mana -= building_type.base_mana_cost
-                building.player_id.food -= building_type.base_food_cost
-                building.is_constructed = False
-                building.construction_start_time = fields.Datetime.now()
-                building.remaining_construction_time = building.construction_time
-                # Lanza el temporizador
-                self.env['ir.cron'].sudo().create({
-                    'name': f"Construction Timer for {building.name}",
-                    'model_id': self.env.ref('game.model_game_building').id,
-                    'state': 'code',
-                    'code': f"model.browse({building.id}).update_construction_state()",
-                    'interval_number': 1,
-                    'interval_type': 'minutes',
-                    'numbercall': building.construction_time,
-                    'doall': False,
-                    'active': True
-                })
+            if not building.is_constructed:
+                if building.player_id.gold >= building_type.base_gold_cost and \
+                        building.player_id.mana >= building_type.base_mana_cost and \
+                        building.player_id.food >= building_type.base_food_cost and \
+                        building.player_id.can_build_more_buildings():
+                    building.player_id.gold -= building_type.base_gold_cost
+                    building.player_id.mana -= building_type.base_mana_cost
+                    building.player_id.food -= building_type.base_food_cost
+                    building.is_constructed = False
+                    building.construction_start_time = fields.Datetime.now()
+                    building.remaining_construction_time = building.construction_time
+                    # Lanza el temporizador
+                    self.env['ir.cron'].sudo().create({
+                        'name': f"Construction Timer for {building.name}",
+                        'model_id': self.env.ref('game.model_game_building').id,
+                        'state': 'code',
+                        'code': f"model.browse({building.id}).update_construction_state()",
+                        'interval_number': 1,
+                        'interval_type': 'minutes',
+                        'numbercall': building.construction_time + 1,
+                        'doall': False,
+                        'active': True
+                    })
+                else:
+                    raise ValidationError("Cannot upgrade because the player does not have enough resources.")
+
+            else:
+                raise ValidationError("Cannot construct a building that is already constructed.")
 
     def update_construction_state(self):
         for building in self:
-            if building.remaining_construction_time <= 0:
+            if building.remaining_construction_time == 0:
                 building.is_constructed = True
                 building.remaining_construction_time = 0
-                # Si la construcción se ha completado, inicia la generación de recursos
-                building.start_resource_generation()
             else:
                 building.remaining_construction_time -= 1
 
@@ -253,6 +259,10 @@ class Building(models.Model):
                         'doall': False,
                         'active': True
                     })
+                else:
+                    raise ValidationError("Cannot upgrade because the player does not have enough resources.")
+            else:
+                raise ValidationError("Cannot upgrade because it is already the maximum level.")
 
     @api.depends('construction_start_time', 'construction_time')
     def _compute_completion_date(self):
@@ -264,34 +274,14 @@ class Building(models.Model):
             else:
                 building.completion_date = False
 
-    def start_resource_generation(self):
-        # Si el edificio está construido y tiene un tipo definido
-        if self.is_constructed and self.type_id:
-            # Calcula la cantidad de recursos que se generan por segundo
-            gold_per_minute = self.type_id.gold_production
-            mana_per_minute = self.type_id.mana_production
-            food_per_minute = self.type_id.food_production
-            troops_per_minute = self.type_id.troop_production
-            # Calcula el intervalo para la generación de recursos en minutos
-            interval = 1
-            # Crea una acción programada para la generación de recursos
-            cron_values = {
-                'name': f"Resource Generation for {self.name}",
-                'model_id': self.env.ref('game.model_game_building').id,
-                'state': 'code',
-                'code': f"model.browse({self.id}).generate_resources({gold_per_minute}, {mana_per_minute}, {food_per_minute}, {troops_per_minute})",
-                'interval_number': interval,
-                'interval_type': 'minutes',
-                'numbercall': -1,  # Ejecutar indefinidamente
-                'doall': False,
-                'active': True
-            }
-            self.env['ir.cron'].sudo().create(cron_values)
-
-    def generate_resources(self, gold_per_minute, mana_per_minute, food_per_minute, troops_per_minute):
-        for building in self:
-            # Asegúrate de que el edificio esté construido
-            if building.is_constructed:
+    def generate_resources(self):
+        for building in self.search([]):
+            if building.is_constructed and building.type_id:
+                # Calcula la cantidad de recursos que se generan por segundo
+                gold_per_minute = building.type_id.gold_production
+                mana_per_minute = building.type_id.mana_production
+                food_per_minute = building.type_id.food_production
+                troops_per_minute = building.type_id.troop_production
                 # Asigna los recursos al jugador propietario del edificio
                 building.player_id.gold += gold_per_minute
                 building.player_id.mana += mana_per_minute
@@ -340,38 +330,38 @@ class BattleSimulation(models.Model):
 
     attacker_id = fields.Many2one('game.player', string="Attacker", required=True, ondelete='cascade')
     defender_id = fields.Many2one('game.player', string="Defender", required=True, ondelete='cascade')
-    result = fields.Selection([('attacker_win', 'Attacker Wins'), ('defender_win', 'Defender Wins'), ('draw', 'Draw')],
-                              string="Result")
+    result = fields.Selection(
+        [('attacker_win', 'Attacker Wins'), ('defender_win', 'Defender Wins'), ('draw', 'Draw')],
+        string="Result")
     state = fields.Selection([('draft', 'Draft'), ('in_progress', 'In Progress'), ('done', 'Done')],
                              default='draft', string="State")
     progress = fields.Integer(string='Progress', default=0)
+    start_date = fields.Datetime(string='Start Date')
+    end_date = fields.Datetime(string='End Date')
 
     def action_initiate_battle(self):
+        logging.info('Batalla iniciada')
+        start_date = fields.Datetime.now()
+        end_date = start_date + timedelta(minutes=3)
         self.write({
             'state': 'in_progress',
-            'progress': 0
+            'progress': 0,
+            'start_date': start_date,
+            'end_date': end_date
         })
-
-        # Calcular la fecha de ejecución del cron job (3 minutos después de ahora)
-        nextcall = datetime.now() + timedelta(minutes=3)
-
-        # Configurar el cron job para completar la batalla después de 3 minutos
-        cron_job = self.env['ir.cron'].sudo().create({
-            'name': f'Complete Battle {self.id}',
-            'model_id': self.env.ref('game.model_game_battle').id,
-            'state': 'code',
-            'code': f'model.complete_battle({self.id})',
-            'interval_number': 3,
-            'interval_type': 'minutes',
-            'numbercall': 1,
-            'active': True,
-            'nextcall': nextcall,
-        })
+        self.update_battles()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Battles',
+            'res_model': 'game.battle',
+            'view_mode': 'tree,form',
+            'target': 'current',
+        }
 
     @api.model
     def complete_battle(self, battle_id):
         battle = self.browse(battle_id)
-        if battle.exists():
+        if battle:
             battle.write({
                 'state': 'done',
                 'progress': 100
@@ -379,8 +369,8 @@ class BattleSimulation(models.Model):
             battle.simulate_battle()
 
     def simulate_battle(self):
-        attacker_troops = self.attacker_id.troop_count
-        defender_troops = self.defender_id.troop_count
+        attacker_troops = self.attacker_id.troops
+        defender_troops = self.defender_id.troops
 
         if attacker_troops > defender_troops:
             self.result = 'attacker_win'
@@ -395,28 +385,32 @@ class BattleSimulation(models.Model):
             return
 
         resources_loser = {'gold': loser.gold, 'mana': loser.mana, 'food': loser.food}
-        resources_winner = {'gold': winner.gold, 'mana': winner.mana, 'food': winner.food}
-
-        loser_troops_lost = int(loser.troop_count * 0.5)
+        loser_troops_lost = int(loser.troops * 0.5)
         loser_resources_lost = {resource: int(value * 0.25) for resource, value in resources_loser.items()}
 
-        # El ganador recibe el 25% de los recursos del perdedor
-        for resource in resources_loser:
-            resources_winner[resource] += int(resources_loser[resource] * 0.25)
-
-        # El perdedor pierde el 25% de sus recursos
-        for resource in resources_loser:
-            loser.write({resource: resources_loser[resource] - loser_resources_lost[resource]})
-
-        loser.write({
-            'troop_count': loser.troop_count - loser_troops_lost
+        winner.write({
+            'troops': winner.troops - loser_troops_lost,
+            'gold': winner.gold + loser_resources_lost['gold'],
+            'mana': winner.mana + loser_resources_lost['mana'],
+            'food': winner.food + loser_resources_lost['food']
         })
 
-        winner_troops_lost = int(loser.troop_count * 0.5)
+        loser.write({
+            'troops': loser.troops - loser_troops_lost,
+            'gold': loser.gold - loser_resources_lost['gold'],
+            'mana': loser.mana - loser_resources_lost['mana'],
+            'food': loser.food - loser_resources_lost['food']
+        })
 
-        # Ambos pierden el 50% de las tropas del perdedor
-        loser.write({'troop_count': loser.troop_count - loser_troops_lost})
-        winner.write({'troop_count': winner.troop_count - winner_troops_lost})
+    def update_battles(self):
+        logging.info('El cron funciona')
+        battles_in_progress = self.search([('state', '=', 'in_progress')])
+        logging.info(battles_in_progress)
+        for battle in battles_in_progress:
+            logging.info(battle.end_date)
+            if battle.end_date <= fields.Datetime.now():
+                logging.info('La batalla finalizo')
+                battle.complete_battle(battle.id)
 
 
 class PlayerCreationWizard(models.TransientModel):
@@ -498,13 +492,13 @@ class PlayerCreationWizard(models.TransientModel):
                 'player_id': player.id,
             })
 
-        return {
-            'type': 'ir.actions.act_window',
-            'name': 'Players',
-            'res_model': 'game.player',
-            'view_mode': 'tree,form',
-            'target': 'current',
-        }
+            return {
+                'type': 'ir.actions.act_window',
+                'name': 'Players',
+                'res_model': 'game.player',
+                'view_mode': 'tree,form',
+                'target': 'current',
+            }
 
 
 class BuildingWizard(models.TransientModel):
@@ -568,7 +562,10 @@ class BattleWizard(models.TransientModel):
             'attacker_id': self.attacker_id.id,
             'defender_id': self.defender_id.id,
             'result': self.result,
-            'state': 'done'
+            'state': 'in_progress',
+            'progress': 0,
+            'start_date': fields.Datetime.now(),
+            'end_date': (fields.Datetime.now() + timedelta(minutes=3))
         })
         return {
             'type': 'ir.actions.act_window',
