@@ -5,17 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b6c70378-dd06-44b4-9b9e-aec1e269e68e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/game/demo/game_data_demo.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/game/views/game_battle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/game/views/game_building.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/game/views/game_building_summary.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/game/views/game_building_types.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/game/__manifest__.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/__manifest__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game/demo/demo.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/demo/game_data_demo.xml" beforeDir="false" afterPath="$PROJECT_DIR$/game/demo/game_data_demo.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/game/models/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/models/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game/security/ir.model.access.csv" beforeDir="false" afterPath="$PROJECT_DIR$/game/security/ir.model.access.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game/views/player.xml" beforeDir="false" afterPath="$PROJECT_DIR$/game/views/game_player.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/views/game_player.xml" beforeDir="false" afterPath="$PROJECT_DIR$/game/views/game_player.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/game/views/views.xml" beforeDir="false" afterPath="$PROJECT_DIR$/game/views/views.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -73,9 +67,9 @@
       <window_info anchor="bottom" id="Run" weight="0.32173383" />
       <window_info anchor="bottom" id="Find" weight="0.25091577" />
       <window_info anchor="bottom" id="Version Control" order="0" />
-      <window_info anchor="bottom" id="Problems View" order="1" weight="0.25183824" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="2" visible="true" weight="0.31440783" />
-      <window_info anchor="bottom" id="Services" order="3" />
+      <window_info anchor="bottom" id="Problems View" order="1" weight="0.25214726" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="2" visible="true" weight="0.27914113" />
+      <window_info anchor="bottom" id="Services" order="3" weight="0.84723926" />
       <window_info anchor="right" id="Plots" show_stripe_button="false" />
       <window_info anchor="right" id="Endpoints" show_stripe_button="false" />
       <window_info anchor="right" content_ui="combo" id="Notifications" order="0" weight="0.25" />
@@ -108,7 +102,7 @@
       <workItem from="1716119695087" duration="334000" />
       <workItem from="1716120523324" duration="10650000" />
       <workItem from="1716230285760" duration="979000" />
-      <workItem from="1716232826556" duration="11232000" />
+      <workItem from="1716232826556" duration="16256000" />
     </task>
     <servers />
   </component>

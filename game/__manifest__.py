@@ -37,7 +37,7 @@
     ],
     # only loaded in demonstration mode
     'demo': [
-        'demo/game_data_demo.xml',
+        #'demo/game_data_demo.xml',
     ],
     'installable': True,
     'application': True,

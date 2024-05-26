@@ -66,20 +66,22 @@
         </record>
 
         <!-- Players -->
-        <record id="Maria" model="game.player">
+        <record id="Maria" model="res.partner">
             <field name="name">Maria</field>
             <field name="town_hall_level">1</field>
             <field name="gold">1000</field>
             <field name="mana">1000</field>
             <field name="food">1000</field>
+            <field name="is_player">True</field>
         </record>
 
-        <record id="Juan" model="game.player">
+        <record id="Juan" model="res.partner">
             <field name="name">Ivan</field>
             <field name="town_hall_level">2</field>
             <field name="gold">2000</field>
             <field name="mana">2000</field>
             <field name="food">2000</field>
+            <field name="is_player">1</field>
         </record>
 
         <!-- Buildings To Players -->
@@ -87,7 +89,7 @@
             <field name="player_id" ref="Maria"/>
             <field name="type_id" ref="building_type_mine"/>
             <field name="level">1</field>
-            <field name="is_constructed">True</field>
+            <field name="is_constructed">1</field>
         </record>
 
         <record id="building_2" model="game.building">

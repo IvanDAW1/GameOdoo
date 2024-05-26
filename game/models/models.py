@@ -9,10 +9,11 @@ logging.basicConfig(filename='/var/log/odoo/odoo-server.log.4', level=logging.DE
 
 
 class Player(models.Model):
-    _name = 'game.player'
-    _description = 'Game Player'
+    _name = 'res.partner'
+    _inherit = 'res.partner'
+    _description = 'The Players'
 
-    name = fields.Char(string="Name", required=True)
+    is_player = fields.Boolean(default=False)
     reference_field = fields.Char(string="Reference Field", compute='_compute_reference_field')
     creation_date = fields.Datetime(string="Creation Date", readonly=True, compute='_compute_creation_date')
 
@@ -148,7 +149,7 @@ class Building(models.Model):
     _description = 'Building'
 
     name = fields.Char(string="Name", compute='_compute_name', store=True)
-    player_id = fields.Many2one('game.player', string="Player", required=True, ondelete='cascade')
+    player_id = fields.Many2one('res.partner', string="Player", required=True, ondelete='cascade')
     player_name = fields.Char(string="Player Name", related='player_id.name', store=True)
     type_id = fields.Many2one('game.building.type', string="Building Type", required=True)
     level = fields.Integer(string="Level", default=1)
@@ -328,8 +329,8 @@ class BattleSimulation(models.Model):
     _name = 'game.battle'
     _description = 'Battle Simulation'
 
-    attacker_id = fields.Many2one('game.player', string="Attacker", required=True, ondelete='cascade')
-    defender_id = fields.Many2one('game.player', string="Defender", required=True, ondelete='cascade')
+    attacker_id = fields.Many2one('res.partner', string="Attacker", required=True, ondelete='cascade')
+    defender_id = fields.Many2one('res.partner', string="Defender", required=True, ondelete='cascade')
     result = fields.Selection(
         [('attacker_win', 'Attacker Wins'), ('defender_win', 'Defender Wins'), ('draw', 'Draw')],
         string="Result")
@@ -477,7 +478,7 @@ class PlayerCreationWizard(models.TransientModel):
 
     def action_create_player(self):
         # Crea el jugador
-        player = self.env['game.player'].create({
+        player = self.env['res.partner'].create({
             'name': self.name,
             'town_hall_level': self.town_hall_level,
         })
@@ -495,7 +496,7 @@ class PlayerCreationWizard(models.TransientModel):
             return {
                 'type': 'ir.actions.act_window',
                 'name': 'Players',
-                'res_model': 'game.player',
+                'res_model': 'res.partner',
                 'view_mode': 'tree,form',
                 'target': 'current',
             }
@@ -519,8 +520,8 @@ class BattleWizard(models.TransientModel):
     _name = 'game.battle_wizard'
     _description = 'Battle Wizard'
 
-    attacker_id = fields.Many2one('game.player', string="Attacker", required=True, ondelete='cascade')
-    defender_id = fields.Many2one('game.player', string="Defender", required=True, ondelete='cascade')
+    attacker_id = fields.Many2one('res.partner', string="Attacker", required=True, ondelete='cascade')
+    defender_id = fields.Many2one('res.partner', string="Defender", required=True, ondelete='cascade')
     result = fields.Selection([('attacker_win', 'Attacker Wins'), ('defender_win', 'Defender Wins'), ('draw', 'Draw')],
                               string="Result", readonly=True)
     state = fields.Selection([
@@ -574,3 +575,13 @@ class BattleWizard(models.TransientModel):
             'view_mode': 'tree,form',
             'target': 'current',
         }
+
+
+class ResCreationWizard(models.TransientModel):
+    _name = 'res.partner.creation.wizard'
+    _description = 'Sin esto no funciona no se si es por la base de datos o que '
+
+
+class Pepe(models.Model):
+    _name = 'game.player'
+    _description = 'Sin esto no funciona no se si es por la base de datos o que '

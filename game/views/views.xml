@@ -4,8 +4,9 @@
         <!-- Actions -->
         <record model="ir.actions.act_window" id="game.action_player">
             <field name="name">Players</field>
-            <field name="res_model">game.player</field>
+            <field name="res_model">res.partner</field>
             <field name="view_mode">tree,form,kanban</field>
+            <field name="domain"> [('is_player','=',True)]</field>
         </record>
 
         <record model="ir.actions.act_window" id="action_game_building_type_tree">
